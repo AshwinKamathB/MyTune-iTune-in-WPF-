@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="MusicPlayer.MusicModule.Views.Albums.AlbumDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row ="0" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal">
+            <TextBlock  FontWeight="Bold" FontSize="24" Text="{Binding Path=Album.Artist.Name}" Margin="5"/>
+            <Button  BorderBrush="Transparent" Width="32px" Height="32px" Margin="2"  Background="{StaticResource LightBrush}"  >
+                <Image  Source="/Images\play.png" />
+            </Button>
+            <Button  BorderBrush="Transparent"  Width="32px" Height="32px" Margin="2"  Background="{StaticResource LightBrush}"  >
+                <Image  Source="/Images\shuffle.png" />
+            </Button>
+            <Button  BorderBrush="Transparent"  Width="32px" Height="32px" Margin="2" Background="{StaticResource LightBrush}"  >
+                <Image  Source="/Images\next-arrow.png" />
+            </Button>
+
+        </StackPanel>
+        <StackPanel Grid.Row ="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal">
+            <TextBlock  FontWeight="Normal" FontSize="20" Text="1 Album" Margin="5"/>
+            <TextBlock  FontWeight="Normal" FontSize="20" Text="," Margin="5"/>
+            <TextBlock  FontWeight="Normal" FontSize="20" Text="{Binding Path=Album.SongsCount, StringFormat= Songs {0}}" Margin="5"/>
+        </StackPanel>
+        <Image Grid.Column="0" VerticalAlignment="top" Height="200" Width="200" Grid.Row="2" Source="{Binding Path=Album.AlbumArtUrl}"></Image>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Margin="2" BorderThickness="0,0,0,1" BorderBrush="Black">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"  FontWeight="Bold" FontSize="16px" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Album.Title}" Margin="5"/>
+                    <TextBlock Grid.Column="1" FontWeight="Normal" FontSize="14px" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=Album.ReleaseYear}" Margin="5"/>
+                </Grid>
+            </Border>
+            
+            <DataGrid ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding Album.Songs}" GridLinesVisibility="None"  IsReadOnly="true" ColumnWidth=""  HeadersVisibility="None" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Foreground="Gray" Width="20" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Width="*" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Foreground="Gray" Width="50" Binding="{Binding Duration}"/>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Height" Value="32"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="{x:Null}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style> 
+                </DataGrid.CellStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Height" Value="32"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="{x:Null}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

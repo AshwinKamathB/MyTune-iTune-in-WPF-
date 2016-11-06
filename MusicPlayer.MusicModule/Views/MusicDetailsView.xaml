@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="MusicPlayer.MusicModule.Views.MusicDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Background="{StaticResource DarkBrush}"
+             xmlns:regions="http://www.codeplex.com/CompositeWPF"
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <!--<Style TargetType="{x:Type TabItem}"
+               x:Key="HeaderStyle">
+            <Setter Property="Header"
+                    Value="{Binding RelativeSource={RelativeSource Self}, 
+                    Path=Content.DataContext.ViewName}" />
+        </Style>-->
+    </UserControl.Resources>
+    <Grid Background="{StaticResource DarkBrush}" x:Name="LayoutRoot">
+        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <TabControl SelectedIndex="{Binding SelectedIndex}"
+            Background="{StaticResource LightBrush}"
+            AutomationProperties.AutomationId="MusicDetailTabControl"
+            regions:RegionManager.RegionName="TabRegion"
+            regions:RegionManager.RegionContext="{Binding CurrentArtist}"
+            Width="Auto"
+            FontWeight="Bold"
+            Height="Auto"
+            HorizontalAlignment="Stretch"
+            ItemContainerStyle="{StaticResource HeaderStyle}">
+        </TabControl>
+
+        <Grid Grid.Row="0" Height="{Binding ActualHeight, ElementName=tabItem}"  VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Border BorderBrush="{StaticResource DisabledBackgroundBrush}" BorderThickness="0,0,0,1">
+                    <ComboBox Height="32px"  Width="190px" HorizontalAlignment="Left" SelectedIndex="0" x:Name="Combobox" ItemsSource="{Binding EntertaimentTypes}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Icon}" Width="24px" Height="24px"/>
+                                    <TextBlock Margin="10,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="0" Height="{Binding ActualHeight, ElementName=tabItem}" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button  BorderBrush="Transparent"  Width="30px" Height="30px" Margin="0,0,5,0"  Background="{StaticResource LightBrush}"  >
+                    <Image  Source="/Images\menu-alt-24.png" />
+                </Button>
+                <Button FontWeight="Bold" Background="{DynamicResource LightBrush}" Height="32px" Width="150" BorderBrush="{StaticResource DisabledBackgroundBrush}" Content="iTunes Store" />
+            </StackPanel>
+        </Grid>
+
+       
+    </Grid>
+   
+</UserControl>
