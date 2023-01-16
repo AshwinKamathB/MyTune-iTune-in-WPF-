@@ -4,7 +4,7 @@ using Microsoft.Practices.Prism.UnityExtensions;
 
 namespace MusicPlayer
 {
-    public class UICompositionBootstrapper : UnityBootstrapperA
+    public class UICompositionBootstrapper : UnityBootstrapperAB
     {
         protected override void ConfigureModuleCatalog()
         {
